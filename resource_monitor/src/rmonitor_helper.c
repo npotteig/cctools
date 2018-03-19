@@ -119,6 +119,10 @@ void rmonitor_helper_initialize() {
 	define_original_dlsym(open64);
 #endif
 
+	if(!family_of_fd) {
+		family_of_fd = itable_create(8);
+	}
+
 	initializing_helper = 0;
 }
 
@@ -126,11 +130,6 @@ void rmonitor_helper_initialize() {
 pid_t fork()
 {
 	pid_t pid;
-
-	if(!original_fork) {
-		rmonitor_helper_initialize();
-		assert(original_fork);
-	}
 
 	debug(D_RMON, "fork from %d.\n", getpid());
 	pid = original_fork();
@@ -343,14 +342,6 @@ int socket(int domain, int type, int protocol)
 {
 	int fd;
 
-	if(!original_socket) {
-		rmonitor_helper_initialize();
-		assert(original_socket);
-	}
-
-	if(!family_of_fd)
-		family_of_fd = itable_create(8);
-
 	fd = original_socket(domain, type, protocol);
 
 	if(fd > -1 && (domain != AF_LOCAL || domain != AF_NETLINK)) {
@@ -420,11 +411,6 @@ ssize_t recv(int fd, void *buf, size_t count, int flags)
 {
 	struct rmonitor_msg msg;
 
-	if(!original_recv) {
-		rmonitor_helper_initialize();
-		assert(original_recv);
-	}
-
 	msg.type   = RX;
 	msg.origin = getpid();
 
@@ -442,11 +428,6 @@ ssize_t recv(int fd, void *buf, size_t count, int flags)
 ssize_t recvfrom(int fd, void *buf, size_t count, int flags, struct sockaddr *src, socklen_t *addrlen)
 {
 	struct rmonitor_msg msg;
-
-	if(!original_recvfrom) {
-		rmonitor_helper_initialize();
-		assert(original_recvfrom);
-	}
 
 	msg.type   = RX;
 	msg.origin = getpid();
@@ -466,11 +447,6 @@ ssize_t send(int fd, const void *buf, size_t count, int flags)
 {
 	struct rmonitor_msg msg;
 
-	if(!original_send) {
-		rmonitor_helper_initialize();
-		assert(original_send);
-	}
-
 	msg.type   = TX;
 	msg.origin = getpid();
 
@@ -488,11 +464,6 @@ ssize_t send(int fd, const void *buf, size_t count, int flags)
 ssize_t sendmsg(int fd, const struct msghdr *mg, int flags)
 {
 	struct rmonitor_msg msg;
-
-	if(!original_sendmsg) {
-		rmonitor_helper_initialize();
-		assert(original_sendmsg);
-	}
 
 	msg.type   = TX;
 	msg.origin = getpid();
@@ -512,11 +483,6 @@ ssize_t sendmsg(int fd, const struct msghdr *mg, int flags)
 ssize_t recvmsg(int fd, struct msghdr *mg, int flags)
 {
 	struct rmonitor_msg msg;
-
-	if(!original_recvmsg) {
-		rmonitor_helper_initialize();
-		assert(original_recvmsg);
-	}
 
 	msg.type   = RX;
 	msg.origin = getpid();
@@ -578,7 +544,6 @@ void exit_wrapper_preamble(int status)
 	} else {
 		signal(SIGCONT, old_handler);
 	}
-
 
 	debug(D_RMON, "Continue with %s: %d.\n", str_msgtype(END_WAIT), getpid());
 }
@@ -644,11 +609,6 @@ pid_t waitpid(pid_t pid, int *status, int options)
 {
 	int status_; //status might be NULL, thus we use status_ to retrive the state.
 	pid_t pidb;
-
-	if(!original_waitpid) {
-		rmonitor_helper_initialize();
-		assert(original_waitpid);
-	}
 
 	debug(D_RMON, "waiting from %d for %d.\n", getpid(), pid);
 	pidb = original_waitpid(pid, &status_, options);
