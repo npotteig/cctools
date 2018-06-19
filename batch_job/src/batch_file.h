@@ -6,10 +6,15 @@ See the file COPYING for details.
 
 #ifndef BATCH_FILE_H
 #define BATCH_FILE_H
+#include <errno.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 #include "batch_job.h"
 #include "sha1.h"
 #include "list.h"
+#include "debug.h"
+
 
 struct batch_file {
 	char *outer_name;
@@ -60,5 +65,17 @@ int batch_file_outer_compare(const void *file1, const void *file2);
 @return Allocated string of the hash, user should free.
 */
 char * batch_file_generate_id(struct batch_file *f);
+
+/** Finds if the name of some file is a directory
+@param file_name The directory that will be checked
+@return Integer deciding if it is a directory
+ */
+int is_dir(char *file_name);
+
+/** Generates a sha1 hash based on the directory's contents.
+@param file_name The directory that will be checked
+@return Allocated string of the hash, user should free.
+*/
+char *  batch_file_generate_id_dir(char *file_name);
 
 #endif

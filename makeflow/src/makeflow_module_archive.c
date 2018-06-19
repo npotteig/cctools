@@ -18,6 +18,8 @@ Update/Migrated to hook: Nick Hazekamp
 #include <libgen.h>
 #include <time.h>
 #include <sys/time.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 #include "copy_stream.h"
 #include "create_dir.h"
@@ -267,7 +269,15 @@ static int makeflow_archive_write_task_info(struct archive_instance *a, struct d
 	struct jx * input_files = jx_object(NULL);
 	struct list_cursor *cur = list_cursor_create(t->input_files);
 	for(list_seek(cur, 0); list_get(cur, (void**)&f); list_next(cur)) {
-		char *id = batch_file_generate_id(f);
+		char * id;
+	        if(is_dir(f->inner_name) == 0){
+			if(!f->hash)
+				f->hash = batch_file_generate_id_dir(f->inner_name);
+	                id = f->hash;
+	        }
+	        else{
+	                id = batch_file_generate_id(f);
+	        }
 		jx_insert(input_files, jx_string(f->inner_name), jx_string(id));
 		free(id);
 	}
@@ -277,7 +287,15 @@ static int makeflow_archive_write_task_info(struct archive_instance *a, struct d
 	struct jx * output_files = jx_object(NULL);
 	cur = list_cursor_create(t->output_files);
 	for(list_seek(cur, 0); list_get(cur, (void**)&f); list_next(cur)) {
-		char *id = batch_file_generate_id(f);
+		char * id;
+                if(is_dir(f->inner_name) == 0){
+			if(!f->hash)
+                                f->hash = batch_file_generate_id_dir(f->inner_name);
+                        id = f->hash;
+                }
+                else{
+                        id = batch_file_generate_id(f);
+                }
 		jx_insert(output_files, jx_string(f->inner_name), jx_string(id));
 		free(id);
 	}
@@ -329,6 +347,9 @@ static int makeflow_archive_write_task_info(struct archive_instance *a, struct d
 
 	return 1;
 }
+
+
+
 
 /* Check to see if a file is already in the s3 bucket */
 static int in_s3_archive(struct archive_instance *a, char *file_name){
@@ -390,7 +411,16 @@ static int makeflow_archive_s3_file(struct archive_instance *a, char *batchID, c
  */
 static int makeflow_archive_file(struct archive_instance *a, struct batch_file *f, char *job_file_archive_path) {
 	/* Generate the file archive id (content based) if does not exist. */
-	char * id = batch_file_generate_id(f);
+	char * id;
+	if(is_dir(f->inner_name) == 0){
+		if(!f->hash)
+                        f->hash = batch_file_generate_id_dir(f->inner_name);
+		debug(D_MAKEFLOW_HOOK, " This is the hash of %s: %s",f->inner_name, f->hash);
+                id = f->hash;
+	}
+	else{
+		id = batch_file_generate_id(f);
+	}	
 	struct stat buf;
 	int rv = 0;
 
@@ -471,7 +501,7 @@ static int makeflow_archive_write_input_files(struct archive_instance *a, struct
 	struct list_cursor *cur = list_cursor_create(t->input_files);
 	// Iterate through input files
 	for(list_seek(cur, 0); list_get(cur, (void**)&f); list_next(cur)) {
-		char *input_file_path = string_format("%s/input_files/%s", archive_directory_path,  f->inner_name);
+		char *input_file_path = string_format("%s/input_files/%s", archive_directory_path,f->inner_name);
 		// Archive each file for inputs
 		int failed_checksum = makeflow_archive_file(a, f, input_file_path);
 		free(input_file_path);
@@ -492,7 +522,7 @@ static int makeflow_archive_write_output_files(struct archive_instance *a, struc
 	struct list_cursor *cur = list_cursor_create(t->output_files);
 	// Iterate through output files
 	for(list_seek(cur, 0); list_get(cur, (void**)&f); list_next(cur)) {
-		char *output_file_path = string_format("%s/output_files/%s", archive_directory_path,  f->inner_name);
+		char *output_file_path = string_format("%s/output_files/%s", archive_directory_path,f->inner_name);
 		// Archive each file for outputs
 		int failed_checksum = makeflow_archive_file(a, f, output_file_path);
 		free(output_file_path);
@@ -614,7 +644,7 @@ int makeflow_archive_copy_preserved_files(struct archive_instance *a, struct bat
 	// Iterate through output files
 	for(list_seek(cur, 0); list_get(cur, (void**)&f); list_next(cur)) {
 		// Gets path of output file		
-		char *output_file_path = string_format("%s/output_files/%s",task_path, f->inner_name);
+		char *output_file_path = string_format("%s/output_files/%s",task_path,f->inner_name);
 		// Copy output file over
 		int success = copy_file_to_file(output_file_path, f->outer_name);
 		free(output_file_path);

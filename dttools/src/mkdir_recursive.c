@@ -19,6 +19,7 @@ See the file COPYING for details.
 #include <limits.h>
 #include <stdlib.h>
 #include <string.h>
+#include "debug.h"
 
 int mkdirat_recursive (int fd, const char *path, mode_t mode)
 {
@@ -37,6 +38,7 @@ int mkdirat_recursive (int fd, const char *path, mode_t mode)
 
 		rc = mkdirat(fd, subpath, mode);
 		if (rc == -1) {
+			debug(D_MAKEFLOW,"Error at this subpath %s",subpath);
 			if (errno == EEXIST) {
 				struct stat info;
 				CATCHUNIX(fstatat(fd, subpath, &info, 0));

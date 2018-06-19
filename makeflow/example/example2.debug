@@ -1,0 +1,452 @@
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: ../src/makeflow version 7.0.0  (released 2018-06-06 13:51:28 -0400)
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: Built by npotteig@disc03.crc.nd.edu on 2018-06-06 13:51:28 -0400
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: System: Linux disc03.crc.nd.edu 3.10.0-862.3.2.el7.x86_64 #1 SMP Tue May 15 18:22:15 EDT 2018 x86_64 x86_64 x86_64 GNU/Linux
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: Configuration: --strict --tcp-low-port 9000 --tcp-high-port 9500
+2018/06/12 13:47:46.26 makeflow[27861] auth: kerberos: not compiled in
+2018/06/12 13:47:46.26 makeflow[27861] auth: globus: not compiled in
+2018/06/12 13:47:46.26 makeflow[27861] auth: unix: registered
+2018/06/12 13:47:46.26 makeflow[27861] auth: ticket: registered
+2018/06/12 13:47:46.26 makeflow[27861] auth: hostname: registered
+2018/06/12 13:47:46.26 makeflow[27861] auth: address: registered
+2018/06/12 13:47:46.26 makeflow[27861] makeflow_hook: Hook Shared FS:trying to register
+2018/06/12 13:47:46.26 makeflow[27861] makeflow_hook: Hook Shared FS:registered
+2018/06/12 13:47:46.26 makeflow[27861] makeflow_hook: Hook Fail Dir:trying to register
+2018/06/12 13:47:46.26 makeflow[27861] makeflow_hook: Hook Fail Dir:registered
+2018/06/12 13:47:46.26 makeflow[27861] makeflow_hook: hook Archive:initializing
+2018/06/12 13:47:46.26 makeflow[27861] makeflow_hook: hook Shared FS:initializing
+2018/06/12 13:47:46.26 makeflow[27861] makeflow_hook: hook Fail Dir:initializing
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: VARIABLE: =
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: LITERAL: CURL
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: LITERAL: /usr/bin/curl
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: dag variable name=CURL, value=/usr/bin/curl
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: VARIABLE: =
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: LITERAL: CONVERT
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: LITERAL: /usr/bin/convert
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: dag variable name=CONVERT, value=/usr/bin/convert
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: VARIABLE: =
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: LITERAL: URL
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: LITERAL: http://ccl.cse.nd.edu/images/capitol.jpg
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: dag variable name=URL, value=http://ccl.cse.nd.edu/images/capitol.jpg
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: VARIABLE: =
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: LITERAL: MAKEFLOW_INPUTS
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: LITERAL:
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: dag variable name=MAKEFLOW_INPUTS, value=
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: VARIABLE: =
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: LITERAL: MAKEFLOW_OUTPUTS
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: LITERAL: capitol.montage.gif
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: dag variable name=MAKEFLOW_OUTPUTS, value=capitol.montage.gif
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: FILES:
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: LITERAL: capitol.montage.gif
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: COLON
+2018/06/12 13:47:46.26 makeflow[27861] makeflow: LITERAL: capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.90.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.180.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.270.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.360.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: NEWLINE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COMMAND:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COMMAND_MOD_END:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: /usr/bin/convert
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: -delay
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: 10
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: -loop
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: 0
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.90.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.180.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.270.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.360.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.270.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.180.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.90.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.montage.gif
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: NEWLINE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: node command=/usr/bin/convert -delay 10 -loop 0 capitol.jpg capitol.90.jpg capitol.180.jpg capitol.270.jpg capitol.360.jpg capitol.270.jpg capitol.180.jpg capitol.90.jpg capitol.montage.gif
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: FILES:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.90.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COLON
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: NEWLINE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COMMAND:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COMMAND_MOD_END:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: /usr/bin/convert
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: -swirl
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: 90
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.90.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: NEWLINE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: node command=/usr/bin/convert -swirl 90 capitol.jpg capitol.90.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: FILES:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.180.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COLON
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: NEWLINE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COMMAND:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COMMAND_MOD_END:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: /usr/bin/convert
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: -swirl
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: 180
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.180.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: NEWLINE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: node command=/usr/bin/convert -swirl 180 capitol.jpg capitol.180.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: FILES:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.270.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COLON
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: NEWLINE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COMMAND:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COMMAND_MOD_END:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: /usr/bin/convert
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: -swirl
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: 270
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.270.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: NEWLINE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: node command=/usr/bin/convert -swirl 270 capitol.jpg capitol.270.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: FILES:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.360.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COLON
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: NEWLINE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COMMAND:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COMMAND_MOD_END:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: /usr/bin/convert
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: -swirl
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: 360
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.360.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: NEWLINE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: node command=/usr/bin/convert -swirl 360 capitol.jpg capitol.360.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: FILES:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COLON
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: NEWLINE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COMMAND:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: LOCAL
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: COMMAND_MOD_END:
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: /usr/bin/curl
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: -o
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: SPACE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: LITERAL: http://ccl.cse.nd.edu/images/capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: NEWLINE
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: node command=/usr/bin/curl -o capitol.jpg http://ccl.cse.nd.edu/images/capitol.jpg
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: rule 4 ancestor of 0
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: rule 3 ancestor of 0
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: rule 5 ancestor of 4
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: rule 5 ancestor of 3
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: rule 5 ancestor of 2
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: rule 5 ancestor of 1
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: rule 5 ancestor of 0
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: rule 2 ancestor of 0
+2018/06/12 13:47:46.27 makeflow[27861] makeflow: rule 1 ancestor of 0
+2018/06/12 13:47:46.27 makeflow[27861] batch: set feature `local_job_queue' to `yes'
+2018/06/12 13:47:46.27 makeflow[27861] batch: set feature `absolute_path' to `yes'
+2018/06/12 13:47:46.27 makeflow[27861] batch: set feature `output_directories' to `yes'
+2018/06/12 13:47:46.27 makeflow[27861] batch: set feature `batch_log_name' to `%s.batchlog'
+2018/06/12 13:47:46.27 makeflow[27861] batch: set feature `gc_size' to `yes'
+2018/06/12 13:47:46.27 makeflow[27861] batch: cleared feature `local_job_queue'
+2018/06/12 13:47:46.27 makeflow[27861] batch: created queue 0x1e4f1e0 (local)
+2018/06/12 13:47:46.27 makeflow[27861] batch: set logfile to `example.makeflow.batchlog'
+2018/06/12 13:47:46.27 makeflow[27861] batch: cleared option `batch-options'
+2018/06/12 13:47:46.27 makeflow[27861] batch: cleared option `password'
+2018/06/12 13:47:46.27 makeflow[27861] batch: set option `master-mode' to `standalone'
+2018/06/12 13:47:46.27 makeflow[27861] batch: cleared option `name'
+2018/06/12 13:47:46.27 makeflow[27861] batch: cleared option `priority'
+2018/06/12 13:47:46.27 makeflow[27861] batch: cleared option `keepalive-interval'
+2018/06/12 13:47:46.27 makeflow[27861] batch: cleared option `keepalive-timeout'
+2018/06/12 13:47:46.27 makeflow[27861] batch: set option `caching' to `yes'
+2018/06/12 13:47:46.27 makeflow[27861] batch: cleared option `wait-queue-size'
+2018/06/12 13:47:46.27 makeflow[27861] batch: cleared option `amazon-config'
+2018/06/12 13:47:46.27 makeflow[27861] batch: cleared option `lambda-config'
+2018/06/12 13:47:46.27 makeflow[27861] batch: cleared option `working-dir'
+2018/06/12 13:47:46.28 makeflow[27861] batch: cleared option `master-preferred-connection'
+2018/06/12 13:47:46.28 makeflow[27861] batch: set option `fast-abort' to `-1.000000'
+2018/06/12 13:47:46.28 makeflow[27861] makeflow: makeflow_wrapper_umbrella_preparation...
+2018/06/12 13:47:46.28 makeflow[27861] makeflow: the --umbrella-binary option is not set, therefore an umbrella binary should be available on an execution node if umbrella is used to deliver the execution environment.
+2018/06/12 13:47:46.28 makeflow[27861] makeflow: setting wrapper_umbrella->log_prefix to example.makeflow.umbrella.log
+2018/06/12 13:47:46.28 makeflow[27861] makeflow: setting wrapper_umbrella->mode to local
+2018/06/12 13:47:46.28 makeflow[27861] makeflow: Added capitol.montage.gif to output list
+2018/06/12 13:47:46.28 makeflow[27861] makeflow: checking rules for consistency...
+2018/06/12 13:47:46.28 makeflow[27861] makeflow: checking for consistency of batch system support...
+2018/06/12 13:47:46.28 makeflow[27861] makeflow_hook: Source makeflow example.makeflow stored at /tmp/makeflow.archive.237980/files/87/871b30a3b6bf960a91a62bcfce49d47fb4dd3a80
+2018/06/12 13:47:46.28 makeflow[27861] makeflow: file example.makeflow.batchlog waiting -> running
+2018/06/12 13:47:46.28 makeflow[27861] batch: set option `task-id' to `5'
+2018/06/12 13:47:46.28 makeflow[27861] makeflow: file capitol.jpg waiting -> running
+2018/06/12 13:47:46.28 makeflow[27861] makeflow_hook:  The total checksum time is 0.000011
+2018/06/12 13:47:46.28 makeflow[27861] makeflow_hook: Checking archive for task 5 at 20592
+2018/06/12 13:47:47.58 makeflow[27861] makeflow_hook:  It took 1.299290 seconds for 205921a216c6ce0bec48117dbeaf13dab1e25aa1 to fail downloading to s3://makeflows3archive
+2018/06/12 13:47:47.58 makeflow[27861] makeflow_hook:  The total download time is 1.299290 second(s)
+2018/06/12 13:47:47.58 makeflow[27861] makeflow_hook: unable to copy task files for task 205921a216c6ce0bec48117dbeaf13dab1e25aa1  from S3 bucket
+2018/06/12 13:47:47.58 makeflow[27861] makeflow_hook: task 5 has not been previously archived at /tmp/makeflow.archive.237980/tasks/20/205921a216c6ce0bec48117dbeaf13dab1e25aa1
+2018/06/12 13:47:47.58 makeflow[27861] batch: started process 27873: /usr/bin/curl -o capitol.jpg http://ccl.cse.nd.edu/images/capitol.jpg
+2018/06/12 13:47:47.58 makeflow[27861] makeflow: node 5 waiting -> running
+2018/06/12 13:47:47.58 makeflow[27861] makeflow: local resources: 24 cores, 257087 MB memory, 2097151 MB disk
+2018/06/12 13:47:47.60 makeflow[27861] makeflow: Job 27873 has returned.
+2018/06/12 13:47:47.60 makeflow[27861] makeflow_hook:  The total checksum time is 0.000020
+2018/06/12 13:47:47.60 makeflow[27861] makeflow_hook: task 5 has not been previously archived at /tmp/makeflow.archive.237980/tasks/20/205921a216c6ce0bec48117dbeaf13dab1e25aa1
+2018/06/12 13:47:47.60 makeflow[27861] makeflow: local resources: 24 cores, 257087 MB memory, 2097151 MB disk
+2018/06/12 13:47:47.60 makeflow[27861] makeflow: File capitol.jpg created by rule 5.
+2018/06/12 13:47:47.60 makeflow[27861] makeflow: file capitol.jpg running -> receive
+2018/06/12 13:47:47.60 makeflow[27861] makeflow_hook:  The total checksum time is 0.000026
+2018/06/12 13:47:47.60 makeflow[27861] makeflow_hook: task 5 has not been previously archived at /tmp/makeflow.archive.237980/tasks/20/205921a216c6ce0bec48117dbeaf13dab1e25aa1
+2018/06/12 13:47:47.60 makeflow[27861] makeflow_hook: archiving task 5 in directory: /tmp/makeflow.archive.237980
+2018/06/12 13:47:47.60 makeflow[27861] makeflow_hook:  The total checksum time is 0.000031
+2018/06/12 13:47:47.60 makeflow[27861] makeflow_hook: archiving task 5 to /tmp/makeflow.archive.237980/tasks/20/205921a216c6ce0bec48117dbeaf13dab1e25aa1
+2018/06/12 13:47:48.29 makeflow[27861] makeflow_hook: file/task 23f603c66d4aa1842fd9e8b35b77d65890301587 does not exist in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:47:48.29 makeflow[27861] makeflow_hook:  It took 0.686376 seconds to check if 23f603c66d4aa1842fd9e8b35b77d65890301587 is in s3://makeflows3archive
+2018/06/12 13:47:48.29 makeflow[27861] makeflow_hook:  The total s3 check time is 0.686376 second(s)
+2018/06/12 13:47:49.18 makeflow[27861] makeflow_hook:  It took 0.883630 second(s) for 23f603c66d4aa1842fd9e8b35b77d65890301587 to upload to s3://makeflows3archive
+2018/06/12 13:47:49.18 makeflow[27861] makeflow_hook:  The total upload time is 0.883630 second(s)
+2018/06/12 13:47:49.18 makeflow[27861] makeflow_hook: The task ID in node_success is 205921a216c6ce0bec48117dbeaf13dab1e25aa1
+2018/06/12 13:47:49.84 makeflow[27861] makeflow_hook: file/task 205921a216c6ce0bec48117dbeaf13dab1e25aa1 does not exist in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:47:49.84 makeflow[27861] makeflow_hook:  It took 0.666036 seconds to check if 205921a216c6ce0bec48117dbeaf13dab1e25aa1 is in s3://makeflows3archive
+2018/06/12 13:47:49.84 makeflow[27861] makeflow_hook:  The total s3 check time is 1.352412 second(s)
+2018/06/12 13:47:50.61 makeflow[27861] makeflow_hook:  It took 0.759375 seconds for 205921a216c6ce0bec48117dbeaf13dab1e25aa1 to upload to s3://makeflows3archive
+2018/06/12 13:47:50.61 makeflow[27861] makeflow_hook:  The total upload time is 1.643005 second(s)
+2018/06/12 13:47:50.62 makeflow[27861] makeflow: node 5 running -> complete
+2018/06/12 13:47:50.62 makeflow[27861] batch: set option `task-id' to `4'
+2018/06/12 13:47:50.62 makeflow[27861] makeflow: file capitol.360.jpg waiting -> running
+2018/06/12 13:47:50.62 makeflow[27861] makeflow_hook:  The total checksum time is 0.000511
+2018/06/12 13:47:50.62 makeflow[27861] makeflow_hook: Checking archive for task 4 at ec4e4
+2018/06/12 13:47:51.33 makeflow[27861] makeflow_hook:  It took 0.710815 seconds for ec4e418da1af8b4dc9be2a8c8ea35b0c159eb382 to fail downloading to s3://makeflows3archive
+2018/06/12 13:47:51.33 makeflow[27861] makeflow_hook:  The total download time is 2.010105 second(s)
+2018/06/12 13:47:51.33 makeflow[27861] makeflow_hook: unable to copy task files for task ec4e418da1af8b4dc9be2a8c8ea35b0c159eb382  from S3 bucket
+2018/06/12 13:47:51.33 makeflow[27861] makeflow_hook: task 4 has not been previously archived at /tmp/makeflow.archive.237980/tasks/ec/ec4e418da1af8b4dc9be2a8c8ea35b0c159eb382
+2018/06/12 13:47:51.33 makeflow[27861] batch: started process 27927: /usr/bin/convert -swirl 360 capitol.jpg capitol.360.jpg
+2018/06/12 13:47:51.33 makeflow[27861] makeflow: node 4 waiting -> running
+2018/06/12 13:47:51.33 makeflow[27861] makeflow: local resources: 24 cores, 257087 MB memory, 2097151 MB disk
+2018/06/12 13:47:51.33 makeflow[27861] batch: set option `task-id' to `3'
+2018/06/12 13:47:51.33 makeflow[27861] makeflow: file capitol.270.jpg waiting -> running
+2018/06/12 13:47:51.33 makeflow[27861] makeflow_hook:  The total checksum time is 0.000965
+2018/06/12 13:47:51.33 makeflow[27861] makeflow_hook: Checking archive for task 3 at 16fc9
+2018/06/12 13:47:52.04 makeflow[27861] makeflow_hook:  It took 0.706317 seconds for 16fc906a8d8d3cd6c3b225cf07bc5835ef3187f7 to fail downloading to s3://makeflows3archive
+2018/06/12 13:47:52.04 makeflow[27861] makeflow_hook:  The total download time is 2.716422 second(s)
+2018/06/12 13:47:52.04 makeflow[27861] makeflow_hook: unable to copy task files for task 16fc906a8d8d3cd6c3b225cf07bc5835ef3187f7  from S3 bucket
+2018/06/12 13:47:52.04 makeflow[27861] makeflow_hook: task 3 has not been previously archived at /tmp/makeflow.archive.237980/tasks/16/16fc906a8d8d3cd6c3b225cf07bc5835ef3187f7
+2018/06/12 13:47:52.04 makeflow[27861] batch: started process 27934: /usr/bin/convert -swirl 270 capitol.jpg capitol.270.jpg
+2018/06/12 13:47:52.04 makeflow[27861] makeflow: node 3 waiting -> running
+2018/06/12 13:47:52.04 makeflow[27861] makeflow: local resources: 24 cores, 257087 MB memory, 2097151 MB disk
+2018/06/12 13:47:52.04 makeflow[27861] batch: set option `task-id' to `2'
+2018/06/12 13:47:52.04 makeflow[27861] makeflow: file capitol.180.jpg waiting -> running
+2018/06/12 13:47:52.04 makeflow[27861] makeflow_hook:  The total checksum time is 0.001910
+2018/06/12 13:47:52.04 makeflow[27861] makeflow_hook: Checking archive for task 2 at 423f1
+2018/06/12 13:47:52.72 makeflow[27861] makeflow_hook:  It took 0.677763 seconds for 423f14c1ce2e05dbea63134c12b49b0e18042460 to fail downloading to s3://makeflows3archive
+2018/06/12 13:47:52.72 makeflow[27861] makeflow_hook:  The total download time is 3.394185 second(s)
+2018/06/12 13:47:52.72 makeflow[27861] makeflow_hook: unable to copy task files for task 423f14c1ce2e05dbea63134c12b49b0e18042460  from S3 bucket
+2018/06/12 13:47:52.72 makeflow[27861] makeflow_hook: task 2 has not been previously archived at /tmp/makeflow.archive.237980/tasks/42/423f14c1ce2e05dbea63134c12b49b0e18042460
+2018/06/12 13:47:52.72 makeflow[27861] batch: started process 27942: /usr/bin/convert -swirl 180 capitol.jpg capitol.180.jpg
+2018/06/12 13:47:52.72 makeflow[27861] makeflow: node 2 waiting -> running
+2018/06/12 13:47:52.72 makeflow[27861] makeflow: local resources: 24 cores, 257087 MB memory, 2097151 MB disk
+2018/06/12 13:47:52.72 makeflow[27861] batch: set option `task-id' to `1'
+2018/06/12 13:47:52.72 makeflow[27861] makeflow: file capitol.90.jpg waiting -> running
+2018/06/12 13:47:52.72 makeflow[27861] makeflow_hook:  The total checksum time is 0.002359
+2018/06/12 13:47:52.72 makeflow[27861] makeflow_hook: Checking archive for task 1 at 991c0
+2018/06/12 13:47:53.43 makeflow[27861] makeflow_hook:  It took 0.713548 seconds for 991c0ce24aad6ec0a3bcab1e8c6b9d08ee6d010e to fail downloading to s3://makeflows3archive
+2018/06/12 13:47:53.43 makeflow[27861] makeflow_hook:  The total download time is 4.107733 second(s)
+2018/06/12 13:47:53.43 makeflow[27861] makeflow_hook: unable to copy task files for task 991c0ce24aad6ec0a3bcab1e8c6b9d08ee6d010e  from S3 bucket
+2018/06/12 13:47:53.43 makeflow[27861] makeflow_hook: task 1 has not been previously archived at /tmp/makeflow.archive.237980/tasks/99/991c0ce24aad6ec0a3bcab1e8c6b9d08ee6d010e
+2018/06/12 13:47:53.43 makeflow[27861] batch: started process 27954: /usr/bin/convert -swirl 90 capitol.jpg capitol.90.jpg
+2018/06/12 13:47:53.43 makeflow[27861] makeflow: node 1 waiting -> running
+2018/06/12 13:47:53.43 makeflow[27861] makeflow: local resources: 24 cores, 257087 MB memory, 2097151 MB disk
+2018/06/12 13:47:53.43 makeflow[27861] makeflow: Job 27927 has returned.
+2018/06/12 13:47:53.43 makeflow[27861] makeflow_hook:  The total checksum time is 0.002373
+2018/06/12 13:47:53.43 makeflow[27861] makeflow_hook: task 4 has not been previously archived at /tmp/makeflow.archive.237980/tasks/ec/ec4e418da1af8b4dc9be2a8c8ea35b0c159eb382
+2018/06/12 13:47:53.43 makeflow[27861] makeflow: local resources: 24 cores, 257087 MB memory, 2097151 MB disk
+2018/06/12 13:47:53.43 makeflow[27861] makeflow: File capitol.360.jpg created by rule 4.
+2018/06/12 13:47:53.43 makeflow[27861] makeflow: file capitol.360.jpg running -> receive
+2018/06/12 13:47:53.43 makeflow[27861] makeflow_hook:  The total checksum time is 0.002380
+2018/06/12 13:47:53.43 makeflow[27861] makeflow_hook: task 4 has not been previously archived at /tmp/makeflow.archive.237980/tasks/ec/ec4e418da1af8b4dc9be2a8c8ea35b0c159eb382
+2018/06/12 13:47:53.43 makeflow[27861] makeflow_hook: archiving task 4 in directory: /tmp/makeflow.archive.237980
+2018/06/12 13:47:53.43 makeflow[27861] makeflow_hook:  The total checksum time is 0.002386
+2018/06/12 13:47:53.43 makeflow[27861] makeflow_hook: archiving task 4 to /tmp/makeflow.archive.237980/tasks/ec/ec4e418da1af8b4dc9be2a8c8ea35b0c159eb382
+2018/06/12 13:47:53.43 makeflow[27861] makeflow_hook: file capitol.jpg already archived at /tmp/makeflow.archive.237980/files/23/23f603c66d4aa1842fd9e8b35b77d65890301587
+2018/06/12 13:47:54.10 makeflow[27861] makeflow_hook: file/task 23f603c66d4aa1842fd9e8b35b77d65890301587 already exists in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:47:54.10 makeflow[27861] makeflow_hook:  It took 0.665580 seconds to check if 23f603c66d4aa1842fd9e8b35b77d65890301587 is in s3://makeflows3archive
+2018/06/12 13:47:54.10 makeflow[27861] makeflow_hook:  The total s3 check time is 2.017992 second(s)
+2018/06/12 13:47:54.81 makeflow[27861] makeflow_hook: file/task 6adc7cf027328c11510352217c9cfcd692c8e13e does not exist in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:47:54.81 makeflow[27861] makeflow_hook:  It took 0.712670 seconds to check if 6adc7cf027328c11510352217c9cfcd692c8e13e is in s3://makeflows3archive
+2018/06/12 13:47:54.81 makeflow[27861] makeflow_hook:  The total s3 check time is 2.730662 second(s)
+2018/06/12 13:47:56.31 makeflow[27861] makeflow_hook:  It took 1.502253 second(s) for 6adc7cf027328c11510352217c9cfcd692c8e13e to upload to s3://makeflows3archive
+2018/06/12 13:47:56.31 makeflow[27861] makeflow_hook:  The total upload time is 3.145258 second(s)
+2018/06/12 13:47:56.31 makeflow[27861] makeflow_hook: The task ID in node_success is ec4e418da1af8b4dc9be2a8c8ea35b0c159eb382
+2018/06/12 13:47:56.99 makeflow[27861] makeflow_hook: file/task ec4e418da1af8b4dc9be2a8c8ea35b0c159eb382 does not exist in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:47:56.99 makeflow[27861] makeflow_hook:  It took 0.675776 seconds to check if ec4e418da1af8b4dc9be2a8c8ea35b0c159eb382 is in s3://makeflows3archive
+2018/06/12 13:47:56.99 makeflow[27861] makeflow_hook:  The total s3 check time is 3.406438 second(s)
+2018/06/12 13:47:57.77 makeflow[27861] makeflow_hook:  It took 0.774028 seconds for ec4e418da1af8b4dc9be2a8c8ea35b0c159eb382 to upload to s3://makeflows3archive
+2018/06/12 13:47:57.77 makeflow[27861] makeflow_hook:  The total upload time is 3.919286 second(s)
+2018/06/12 13:47:57.78 makeflow[27861] makeflow: node 4 running -> complete
+2018/06/12 13:47:57.78 makeflow[27861] makeflow: Job 27934 has returned.
+2018/06/12 13:47:57.78 makeflow[27861] makeflow_hook:  The total checksum time is 0.002398
+2018/06/12 13:47:57.78 makeflow[27861] makeflow_hook: task 3 has not been previously archived at /tmp/makeflow.archive.237980/tasks/16/16fc906a8d8d3cd6c3b225cf07bc5835ef3187f7
+2018/06/12 13:47:57.78 makeflow[27861] makeflow: local resources: 24 cores, 257087 MB memory, 2097151 MB disk
+2018/06/12 13:47:57.78 makeflow[27861] makeflow: File capitol.270.jpg created by rule 3.
+2018/06/12 13:47:57.78 makeflow[27861] makeflow: file capitol.270.jpg running -> receive
+2018/06/12 13:47:57.78 makeflow[27861] makeflow_hook:  The total checksum time is 0.002403
+2018/06/12 13:47:57.78 makeflow[27861] makeflow_hook: task 3 has not been previously archived at /tmp/makeflow.archive.237980/tasks/16/16fc906a8d8d3cd6c3b225cf07bc5835ef3187f7
+2018/06/12 13:47:57.78 makeflow[27861] makeflow_hook: archiving task 3 in directory: /tmp/makeflow.archive.237980
+2018/06/12 13:47:57.78 makeflow[27861] makeflow_hook:  The total checksum time is 0.002408
+2018/06/12 13:47:57.78 makeflow[27861] makeflow_hook: archiving task 3 to /tmp/makeflow.archive.237980/tasks/16/16fc906a8d8d3cd6c3b225cf07bc5835ef3187f7
+2018/06/12 13:47:57.78 makeflow[27861] makeflow_hook: file capitol.jpg already archived at /tmp/makeflow.archive.237980/files/23/23f603c66d4aa1842fd9e8b35b77d65890301587
+2018/06/12 13:47:58.49 makeflow[27861] makeflow_hook: file/task 23f603c66d4aa1842fd9e8b35b77d65890301587 already exists in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:47:58.49 makeflow[27861] makeflow_hook:  It took 0.705558 seconds to check if 23f603c66d4aa1842fd9e8b35b77d65890301587 is in s3://makeflows3archive
+2018/06/12 13:47:58.49 makeflow[27861] makeflow_hook:  The total s3 check time is 4.111996 second(s)
+2018/06/12 13:47:59.37 makeflow[27861] makeflow_hook: file/task be9b4ce3aa3a870f537818fde70b476cbd17fb12 does not exist in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:47:59.37 makeflow[27861] makeflow_hook:  It took 0.876478 seconds to check if be9b4ce3aa3a870f537818fde70b476cbd17fb12 is in s3://makeflows3archive
+2018/06/12 13:47:59.37 makeflow[27861] makeflow_hook:  The total s3 check time is 4.988474 second(s)
+2018/06/12 13:48:00.37 makeflow[27861] makeflow_hook:  It took 0.999847 second(s) for be9b4ce3aa3a870f537818fde70b476cbd17fb12 to upload to s3://makeflows3archive
+2018/06/12 13:48:00.37 makeflow[27861] makeflow_hook:  The total upload time is 4.919133 second(s)
+2018/06/12 13:48:00.37 makeflow[27861] makeflow_hook: The task ID in node_success is 16fc906a8d8d3cd6c3b225cf07bc5835ef3187f7
+2018/06/12 13:48:01.15 makeflow[27861] makeflow_hook: file/task 16fc906a8d8d3cd6c3b225cf07bc5835ef3187f7 does not exist in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:01.15 makeflow[27861] makeflow_hook:  It took 0.779983 seconds to check if 16fc906a8d8d3cd6c3b225cf07bc5835ef3187f7 is in s3://makeflows3archive
+2018/06/12 13:48:01.15 makeflow[27861] makeflow_hook:  The total s3 check time is 5.768457 second(s)
+2018/06/12 13:48:01.98 makeflow[27861] makeflow_hook:  It took 0.822567 seconds for 16fc906a8d8d3cd6c3b225cf07bc5835ef3187f7 to upload to s3://makeflows3archive
+2018/06/12 13:48:01.98 makeflow[27861] makeflow_hook:  The total upload time is 5.741700 second(s)
+2018/06/12 13:48:01.98 makeflow[27861] makeflow: node 3 running -> complete
+2018/06/12 13:48:01.98 makeflow[27861] makeflow: Job 27942 has returned.
+2018/06/12 13:48:01.98 makeflow[27861] makeflow_hook:  The total checksum time is 0.002424
+2018/06/12 13:48:01.98 makeflow[27861] makeflow_hook: task 2 has not been previously archived at /tmp/makeflow.archive.237980/tasks/42/423f14c1ce2e05dbea63134c12b49b0e18042460
+2018/06/12 13:48:01.98 makeflow[27861] makeflow: local resources: 24 cores, 257087 MB memory, 2097151 MB disk
+2018/06/12 13:48:01.98 makeflow[27861] makeflow: File capitol.180.jpg created by rule 2.
+2018/06/12 13:48:01.98 makeflow[27861] makeflow: file capitol.180.jpg running -> receive
+2018/06/12 13:48:01.98 makeflow[27861] makeflow_hook:  The total checksum time is 0.002432
+2018/06/12 13:48:01.98 makeflow[27861] makeflow_hook: task 2 has not been previously archived at /tmp/makeflow.archive.237980/tasks/42/423f14c1ce2e05dbea63134c12b49b0e18042460
+2018/06/12 13:48:01.98 makeflow[27861] makeflow_hook: archiving task 2 in directory: /tmp/makeflow.archive.237980
+2018/06/12 13:48:01.98 makeflow[27861] makeflow_hook:  The total checksum time is 0.002440
+2018/06/12 13:48:01.98 makeflow[27861] makeflow_hook: archiving task 2 to /tmp/makeflow.archive.237980/tasks/42/423f14c1ce2e05dbea63134c12b49b0e18042460
+2018/06/12 13:48:01.99 makeflow[27861] makeflow_hook: file capitol.jpg already archived at /tmp/makeflow.archive.237980/files/23/23f603c66d4aa1842fd9e8b35b77d65890301587
+2018/06/12 13:48:02.77 makeflow[27861] makeflow_hook: file/task 23f603c66d4aa1842fd9e8b35b77d65890301587 already exists in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:02.77 makeflow[27861] makeflow_hook:  It took 0.780673 seconds to check if 23f603c66d4aa1842fd9e8b35b77d65890301587 is in s3://makeflows3archive
+2018/06/12 13:48:02.77 makeflow[27861] makeflow_hook:  The total s3 check time is 6.549130 second(s)
+2018/06/12 13:48:03.44 makeflow[27861] makeflow_hook: file/task 457bcaffa16200a3bf80b05fc74416f71133b08b does not exist in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:03.44 makeflow[27861] makeflow_hook:  It took 0.669012 seconds to check if 457bcaffa16200a3bf80b05fc74416f71133b08b is in s3://makeflows3archive
+2018/06/12 13:48:03.44 makeflow[27861] makeflow_hook:  The total s3 check time is 7.218143 second(s)
+2018/06/12 13:48:04.29 makeflow[27861] makeflow_hook:  It took 0.851037 second(s) for 457bcaffa16200a3bf80b05fc74416f71133b08b to upload to s3://makeflows3archive
+2018/06/12 13:48:04.29 makeflow[27861] makeflow_hook:  The total upload time is 6.592737 second(s)
+2018/06/12 13:48:04.29 makeflow[27861] makeflow_hook: The task ID in node_success is 423f14c1ce2e05dbea63134c12b49b0e18042460
+2018/06/12 13:48:04.91 makeflow[27861] makeflow_hook: file/task 423f14c1ce2e05dbea63134c12b49b0e18042460 does not exist in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:04.91 makeflow[27861] makeflow_hook:  It took 0.627307 seconds to check if 423f14c1ce2e05dbea63134c12b49b0e18042460 is in s3://makeflows3archive
+2018/06/12 13:48:04.91 makeflow[27861] makeflow_hook:  The total s3 check time is 7.845449 second(s)
+2018/06/12 13:48:05.76 makeflow[27861] makeflow_hook:  It took 0.830363 seconds for 423f14c1ce2e05dbea63134c12b49b0e18042460 to upload to s3://makeflows3archive
+2018/06/12 13:48:05.76 makeflow[27861] makeflow_hook:  The total upload time is 7.423100 second(s)
+2018/06/12 13:48:05.76 makeflow[27861] makeflow: node 2 running -> complete
+2018/06/12 13:48:05.76 makeflow[27861] makeflow: Job 27954 has returned.
+2018/06/12 13:48:05.76 makeflow[27861] makeflow_hook:  The total checksum time is 0.002452
+2018/06/12 13:48:05.76 makeflow[27861] makeflow_hook: task 1 has not been previously archived at /tmp/makeflow.archive.237980/tasks/99/991c0ce24aad6ec0a3bcab1e8c6b9d08ee6d010e
+2018/06/12 13:48:05.76 makeflow[27861] makeflow: local resources: 24 cores, 257087 MB memory, 2097151 MB disk
+2018/06/12 13:48:05.76 makeflow[27861] makeflow: File capitol.90.jpg created by rule 1.
+2018/06/12 13:48:05.76 makeflow[27861] makeflow: file capitol.90.jpg running -> receive
+2018/06/12 13:48:05.76 makeflow[27861] makeflow_hook:  The total checksum time is 0.002457
+2018/06/12 13:48:05.76 makeflow[27861] makeflow_hook: task 1 has not been previously archived at /tmp/makeflow.archive.237980/tasks/99/991c0ce24aad6ec0a3bcab1e8c6b9d08ee6d010e
+2018/06/12 13:48:05.76 makeflow[27861] makeflow_hook: archiving task 1 in directory: /tmp/makeflow.archive.237980
+2018/06/12 13:48:05.76 makeflow[27861] makeflow_hook:  The total checksum time is 0.002462
+2018/06/12 13:48:05.76 makeflow[27861] makeflow_hook: archiving task 1 to /tmp/makeflow.archive.237980/tasks/99/991c0ce24aad6ec0a3bcab1e8c6b9d08ee6d010e
+2018/06/12 13:48:05.76 makeflow[27861] makeflow_hook: file capitol.jpg already archived at /tmp/makeflow.archive.237980/files/23/23f603c66d4aa1842fd9e8b35b77d65890301587
+2018/06/12 13:48:06.51 makeflow[27861] makeflow_hook: file/task 23f603c66d4aa1842fd9e8b35b77d65890301587 already exists in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:06.51 makeflow[27861] makeflow_hook:  It took 0.743057 seconds to check if 23f603c66d4aa1842fd9e8b35b77d65890301587 is in s3://makeflows3archive
+2018/06/12 13:48:06.51 makeflow[27861] makeflow_hook:  The total s3 check time is 8.588507 second(s)
+2018/06/12 13:48:07.23 makeflow[27861] makeflow_hook: file/task a8f82c20de10e2f1356aa252c02c425228c7362e does not exist in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:07.23 makeflow[27861] makeflow_hook:  It took 0.721313 seconds to check if a8f82c20de10e2f1356aa252c02c425228c7362e is in s3://makeflows3archive
+2018/06/12 13:48:07.23 makeflow[27861] makeflow_hook:  The total s3 check time is 9.309820 second(s)
+2018/06/12 13:48:08.06 makeflow[27861] makeflow_hook:  It took 0.834066 second(s) for a8f82c20de10e2f1356aa252c02c425228c7362e to upload to s3://makeflows3archive
+2018/06/12 13:48:08.06 makeflow[27861] makeflow_hook:  The total upload time is 8.257166 second(s)
+2018/06/12 13:48:08.06 makeflow[27861] makeflow_hook: The task ID in node_success is 991c0ce24aad6ec0a3bcab1e8c6b9d08ee6d010e
+2018/06/12 13:48:08.78 makeflow[27861] makeflow_hook: file/task 991c0ce24aad6ec0a3bcab1e8c6b9d08ee6d010e does not exist in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:08.78 makeflow[27861] makeflow_hook:  It took 0.717953 seconds to check if 991c0ce24aad6ec0a3bcab1e8c6b9d08ee6d010e is in s3://makeflows3archive
+2018/06/12 13:48:08.78 makeflow[27861] makeflow_hook:  The total s3 check time is 10.027773 second(s)
+2018/06/12 13:48:09.55 makeflow[27861] makeflow_hook:  It took 0.758215 seconds for 991c0ce24aad6ec0a3bcab1e8c6b9d08ee6d010e to upload to s3://makeflows3archive
+2018/06/12 13:48:09.55 makeflow[27861] makeflow_hook:  The total upload time is 9.015381 second(s)
+2018/06/12 13:48:09.56 makeflow[27861] makeflow: node 1 running -> complete
+2018/06/12 13:48:09.56 makeflow[27861] batch: set option `task-id' to `0'
+2018/06/12 13:48:09.56 makeflow[27861] makeflow: file capitol.montage.gif waiting -> running
+2018/06/12 13:48:09.56 makeflow[27861] makeflow_hook:  The total checksum time is 0.007102
+2018/06/12 13:48:09.56 makeflow[27861] makeflow_hook: Checking archive for task 0 at a69ec
+2018/06/12 13:48:10.24 makeflow[27861] makeflow_hook:  It took 0.676678 seconds for a69eca0e2d7f17c1cd3964d36da0121e3e1cb733 to fail downloading to s3://makeflows3archive
+2018/06/12 13:48:10.24 makeflow[27861] makeflow_hook:  The total download time is 4.784411 second(s)
+2018/06/12 13:48:10.24 makeflow[27861] makeflow_hook: unable to copy task files for task a69eca0e2d7f17c1cd3964d36da0121e3e1cb733  from S3 bucket
+2018/06/12 13:48:10.24 makeflow[27861] makeflow_hook: task 0 has not been previously archived at /tmp/makeflow.archive.237980/tasks/a6/a69eca0e2d7f17c1cd3964d36da0121e3e1cb733
+2018/06/12 13:48:10.24 makeflow[27861] batch: started process 28241: /usr/bin/convert -delay 10 -loop 0 capitol.jpg capitol.90.jpg capitol.180.jpg capitol.270.jpg capitol.360.jpg capitol.270.jpg capitol.180.jpg capitol.90.jpg capitol.montage.gif
+2018/06/12 13:48:10.24 makeflow[27861] makeflow: node 0 waiting -> running
+2018/06/12 13:48:10.24 makeflow[27861] makeflow: local resources: 24 cores, 257087 MB memory, 2097151 MB disk
+2018/06/12 13:48:12.37 makeflow[27861] makeflow: Job 28241 has returned.
+2018/06/12 13:48:12.37 makeflow[27861] makeflow_hook:  The total checksum time is 0.007124
+2018/06/12 13:48:12.37 makeflow[27861] makeflow_hook: task 0 has not been previously archived at /tmp/makeflow.archive.237980/tasks/a6/a69eca0e2d7f17c1cd3964d36da0121e3e1cb733
+2018/06/12 13:48:12.37 makeflow[27861] makeflow: local resources: 24 cores, 257087 MB memory, 2097151 MB disk
+2018/06/12 13:48:12.37 makeflow[27861] makeflow: File capitol.montage.gif created by rule 0.
+2018/06/12 13:48:12.37 makeflow[27861] makeflow: file capitol.montage.gif running -> receive
+2018/06/12 13:48:12.37 makeflow[27861] makeflow: file capitol.180.jpg receive -> complete
+2018/06/12 13:48:12.37 makeflow[27861] makeflow: file capitol.270.jpg receive -> complete
+2018/06/12 13:48:12.37 makeflow[27861] makeflow: file capitol.360.jpg receive -> complete
+2018/06/12 13:48:12.37 makeflow[27861] makeflow: file capitol.90.jpg receive -> complete
+2018/06/12 13:48:12.37 makeflow[27861] makeflow: file capitol.jpg receive -> complete
+2018/06/12 13:48:12.37 makeflow[27861] makeflow_hook:  The total checksum time is 0.007134
+2018/06/12 13:48:12.37 makeflow[27861] makeflow_hook: task 0 has not been previously archived at /tmp/makeflow.archive.237980/tasks/a6/a69eca0e2d7f17c1cd3964d36da0121e3e1cb733
+2018/06/12 13:48:12.37 makeflow[27861] makeflow_hook: archiving task 0 in directory: /tmp/makeflow.archive.237980
+2018/06/12 13:48:12.37 makeflow[27861] makeflow_hook:  The total checksum time is 0.007142
+2018/06/12 13:48:12.37 makeflow[27861] makeflow_hook: archiving task 0 to /tmp/makeflow.archive.237980/tasks/a6/a69eca0e2d7f17c1cd3964d36da0121e3e1cb733
+2018/06/12 13:48:12.37 makeflow[27861] makeflow_hook: file capitol.180.jpg already archived at /tmp/makeflow.archive.237980/files/45/457bcaffa16200a3bf80b05fc74416f71133b08b
+2018/06/12 13:48:13.07 makeflow[27861] makeflow_hook: file/task 457bcaffa16200a3bf80b05fc74416f71133b08b already exists in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:13.07 makeflow[27861] makeflow_hook:  It took 0.698594 seconds to check if 457bcaffa16200a3bf80b05fc74416f71133b08b is in s3://makeflows3archive
+2018/06/12 13:48:13.07 makeflow[27861] makeflow_hook:  The total s3 check time is 10.726367 second(s)
+2018/06/12 13:48:13.07 makeflow[27861] makeflow_hook: file capitol.270.jpg already archived at /tmp/makeflow.archive.237980/files/be/be9b4ce3aa3a870f537818fde70b476cbd17fb12
+2018/06/12 13:48:13.79 makeflow[27861] makeflow_hook: file/task be9b4ce3aa3a870f537818fde70b476cbd17fb12 already exists in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:13.79 makeflow[27861] makeflow_hook:  It took 0.721010 seconds to check if be9b4ce3aa3a870f537818fde70b476cbd17fb12 is in s3://makeflows3archive
+2018/06/12 13:48:13.79 makeflow[27861] makeflow_hook:  The total s3 check time is 11.447377 second(s)
+2018/06/12 13:48:13.79 makeflow[27861] makeflow_hook: file capitol.360.jpg already archived at /tmp/makeflow.archive.237980/files/6a/6adc7cf027328c11510352217c9cfcd692c8e13e
+2018/06/12 13:48:14.49 makeflow[27861] makeflow_hook: file/task 6adc7cf027328c11510352217c9cfcd692c8e13e already exists in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:14.49 makeflow[27861] makeflow_hook:  It took 0.695916 seconds to check if 6adc7cf027328c11510352217c9cfcd692c8e13e is in s3://makeflows3archive
+2018/06/12 13:48:14.49 makeflow[27861] makeflow_hook:  The total s3 check time is 12.143293 second(s)
+2018/06/12 13:48:14.49 makeflow[27861] makeflow_hook: file capitol.90.jpg already archived at /tmp/makeflow.archive.237980/files/a8/a8f82c20de10e2f1356aa252c02c425228c7362e
+2018/06/12 13:48:15.20 makeflow[27861] makeflow_hook: file/task a8f82c20de10e2f1356aa252c02c425228c7362e already exists in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:15.20 makeflow[27861] makeflow_hook:  It took 0.712321 seconds to check if a8f82c20de10e2f1356aa252c02c425228c7362e is in s3://makeflows3archive
+2018/06/12 13:48:15.20 makeflow[27861] makeflow_hook:  The total s3 check time is 12.855615 second(s)
+2018/06/12 13:48:15.20 makeflow[27861] makeflow_hook: file capitol.jpg already archived at /tmp/makeflow.archive.237980/files/23/23f603c66d4aa1842fd9e8b35b77d65890301587
+2018/06/12 13:48:15.89 makeflow[27861] makeflow_hook: file/task 23f603c66d4aa1842fd9e8b35b77d65890301587 already exists in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:15.89 makeflow[27861] makeflow_hook:  It took 0.689195 seconds to check if 23f603c66d4aa1842fd9e8b35b77d65890301587 is in s3://makeflows3archive
+2018/06/12 13:48:15.89 makeflow[27861] makeflow_hook:  The total s3 check time is 13.544809 second(s)
+2018/06/12 13:48:16.67 makeflow[27861] makeflow_hook: file/task 248f8d3d69579ce8ed816c1dbb4683b054977600 does not exist in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:16.67 makeflow[27861] makeflow_hook:  It took 0.776166 seconds to check if 248f8d3d69579ce8ed816c1dbb4683b054977600 is in s3://makeflows3archive
+2018/06/12 13:48:16.67 makeflow[27861] makeflow_hook:  The total s3 check time is 14.320975 second(s)
+2018/06/12 13:48:17.72 makeflow[27861] makeflow_hook:  It took 1.056097 second(s) for 248f8d3d69579ce8ed816c1dbb4683b054977600 to upload to s3://makeflows3archive
+2018/06/12 13:48:17.73 makeflow[27861] makeflow_hook:  The total upload time is 10.071478 second(s)
+2018/06/12 13:48:17.73 makeflow[27861] makeflow_hook: The task ID in node_success is a69eca0e2d7f17c1cd3964d36da0121e3e1cb733
+2018/06/12 13:48:18.82 makeflow[27861] makeflow_hook: file/task a69eca0e2d7f17c1cd3964d36da0121e3e1cb733 does not exist in the S3 bucket: s3://makeflows3archive
+2018/06/12 13:48:18.82 makeflow[27861] makeflow_hook:  It took 1.091003 seconds to check if a69eca0e2d7f17c1cd3964d36da0121e3e1cb733 is in s3://makeflows3archive
+2018/06/12 13:48:18.82 makeflow[27861] makeflow_hook:  The total s3 check time is 15.411978 second(s)
+2018/06/12 13:48:19.66 makeflow[27861] makeflow_hook:  It took 0.833379 seconds for a69eca0e2d7f17c1cd3964d36da0121e3e1cb733 to upload to s3://makeflows3archive
+2018/06/12 13:48:19.66 makeflow[27861] makeflow_hook:  The total upload time is 10.904857 second(s)
+2018/06/12 13:48:19.67 makeflow[27861] makeflow: node 0 running -> complete
+2018/06/12 13:48:19.67 makeflow[27861] makeflow_hook: Hook Archive:dag_loop rejected DAG
+2018/06/12 13:48:19.67 makeflow[27861] batch: deleting queue 0x1e4f1e0

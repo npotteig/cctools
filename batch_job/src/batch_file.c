@@ -8,6 +8,7 @@ See the file COPYING for details.
 #include "sha1.h"
 #include "stringtools.h"
 #include "xxmalloc.h"
+#include "path.h"
 
 /**
  * Create batch_file from outer_name and inner_name.
@@ -110,3 +111,55 @@ char * batch_file_generate_id(struct batch_file *f) {
 	return xxstrdup(f->hash);
 }
 
+/* Return if the name of a file is a directory */
+int is_dir(char *file_name){
+	if(path_has_doubledots(file_name) || file_name[0] == '.'){
+		return -1;
+	}
+	else{
+		//Grabbed from https://stackoverflow.com/questions/4553012/checking-if-a-file-is-a-directory-or-just-a-file
+		DIR* directory = opendir(file_name);
+
+		if(directory != NULL){
+			closedir(directory);
+			debug(D_MAKEFLOW_HOOK, "%s is a DIRECTORY",file_name);
+			return 0;
+		}
+
+		if(errno == ENOTDIR){
+			return 1;
+		}
+
+		return -1;
+	}
+}
+
+/* Return the content based ID for a directory.
+ * generates the checksum for the directories contents if does not exist */
+char *  batch_file_generate_id_dir(char *file_name){
+        debug(D_MAKEFLOW,"THIS CODE IS RUNNING");
+        char *hash_sum = "";
+        struct dirent *dp;
+        DIR *dfd = opendir(file_name);
+        while((dp = readdir(dfd)) != NULL){
+		if(!(strcmp(dp->d_name,".") == 0) && !(strcmp(dp->d_name,"..") == 0)){
+			char *file_path = string_format("%s/%s",file_name,dp->d_name);
+			if(is_dir(file_path) == 0){
+				hash_sum = string_format("%s%s",hash_sum,batch_file_generate_id_dir(file_path));
+			}
+			else{
+				unsigned char *hash = xxcalloc(1, sizeof(char *)*SHA1_DIGEST_LENGTH);
+				debug(D_MAKEFLOW, "THIS IS THE DP_DNAME: %s", file_path);
+				sha1_file(file_path, hash);
+				debug(D_MAKEFLOW, "THIS IS THE HASH OF DP_DNAME: %s",hash);
+				hash_sum = string_format("%s%s",hash_sum,xxstrdup(sha1_string(hash)));
+				debug(D_MAKEFLOW, "THIS IS THE HASH SUM: %s",hash_sum);
+				free(hash);
+			}
+		}
+        }
+        closedir(dfd);
+	debug(D_MAKEFLOW,"THIS IS THE FINAL HASH SUM: %s",hash_sum);
+        return xxstrdup(hash_sum);
+
+}
