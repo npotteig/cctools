@@ -35,6 +35,7 @@ Update/Migrated to hook: Nick Hazekamp
 #include "timestamp.h"
 #include "unlink_recursive.h"
 #include "xxmalloc.h"
+#include "hash_table.h"
 
 #include "batch_job.h"
 #include "batch_wrapper.h"
@@ -53,6 +54,7 @@ float total_up_time = 0.0;
 float total_down_time = 0.0;
 float total_s3_check_time = 0.0;
 float total_checksum_time = 0.0;
+struct hash_table *s3_files_in_archive = NULL;
 
 struct archive_instance {
 	/* User defined values */
@@ -80,6 +82,10 @@ struct archive_instance *archive_instance_create()
 
 static int create( void ** instance_struct, struct jx *hook_args )
 {
+	if(s3_files_in_archive == NULL){
+                s3_files_in_archive = hash_table_create(0,0);
+        }
+	
 	struct archive_instance *a = archive_instance_create();
 	*instance_struct = a;
 
@@ -271,9 +277,8 @@ static int makeflow_archive_write_task_info(struct archive_instance *a, struct d
 	for(list_seek(cur, 0); list_get(cur, (void**)&f); list_next(cur)) {
 		char * id;
 	        if(is_dir(f->inner_name) == 0){
-			if(!f->hash)
-				f->hash = batch_file_generate_id_dir(f->inner_name);
-	                id = f->hash;
+			f->hash = batch_file_generate_id_dir(f->inner_name);
+	                id = xxstrdup(f->hash);
 	        }
 	        else{
 	                id = batch_file_generate_id(f);
@@ -289,9 +294,8 @@ static int makeflow_archive_write_task_info(struct archive_instance *a, struct d
 	for(list_seek(cur, 0); list_get(cur, (void**)&f); list_next(cur)) {
 		char * id;
                 if(is_dir(f->inner_name) == 0){
-			if(!f->hash)
-                                f->hash = batch_file_generate_id_dir(f->inner_name);
-                        id = f->hash;
+			f->hash = batch_file_generate_id_dir(f->inner_name);
+                        id = xxstrdup(f->hash);
                 }
                 else{
                         id = batch_file_generate_id(f);
@@ -353,25 +357,29 @@ static int makeflow_archive_write_task_info(struct archive_instance *a, struct d
 
 /* Check to see if a file is already in the s3 bucket */
 static int in_s3_archive(struct archive_instance *a, char *file_name){
-	struct timeval start_time;
-        struct timeval end_time;
-	char *inArchive = string_format("aws s3api head-object --bucket %s --key %s >& /dev/null", a->s3_dir+5, file_name);
-        gettimeofday(&start_time, NULL);
-	if(system(inArchive) != 0){
-		debug(D_MAKEFLOW_HOOK, "file/task %s does not exist in the S3 bucket: %s", file_name, a->s3_dir);
+	char *check_sum_value = hash_table_lookup(s3_files_in_archive, file_name);
+        if(check_sum_value == NULL){	
+		struct timeval start_time;
+		struct timeval end_time;
+		char *inArchive = string_format("aws s3api head-object --bucket %s --key %s >& /dev/null", a->s3_dir+5, file_name);
+		gettimeofday(&start_time, NULL);
+		if(system(inArchive) != 0){
+			debug(D_MAKEFLOW_HOOK, "file/task %s does not exist in the S3 bucket: %s", file_name, a->s3_dir);
+			gettimeofday(&end_time,NULL);
+			float run_time = ((end_time.tv_sec*1000000 + end_time.tv_usec) - (start_time.tv_sec*1000000 + start_time.tv_usec)) / 1000000.0;
+			total_s3_check_time += run_time;
+			debug(D_MAKEFLOW_HOOK," It took %f seconds to check if %s is in %s",run_time, file_name, a->s3_dir);
+			debug(D_MAKEFLOW_HOOK," The total s3 check time is %f second(s)",total_s3_check_time);
+			return 0;
+		}
+		debug(D_MAKEFLOW_HOOK, "file/task %s already exists in the S3 bucket: %s", file_name, a->s3_dir);
 		gettimeofday(&end_time,NULL);
-                float run_time = ((end_time.tv_sec*1000000 + end_time.tv_usec) - (start_time.tv_sec*1000000 + start_time.tv_usec)) / 1000000.0;
-                total_s3_check_time += run_time;
-                debug(D_MAKEFLOW_HOOK," It took %f seconds to check if %s is in %s",run_time, file_name, a->s3_dir);
-                debug(D_MAKEFLOW_HOOK," The total s3 check time is %f second(s)",total_s3_check_time);
-		return 0;
+		float run_time = ((end_time.tv_sec*1000000 + end_time.tv_usec) - (start_time.tv_sec*1000000 + start_time.tv_usec)) / 1000000.0;
+		total_s3_check_time += run_time;
+		debug(D_MAKEFLOW_HOOK," It took %f seconds to check if %s is in %s",run_time, file_name, a->s3_dir);
+		debug(D_MAKEFLOW_HOOK," The total s3 check time is %f second(s)",total_s3_check_time);
+		return 1;
 	}
-	debug(D_MAKEFLOW_HOOK, "file/task %s already exists in the S3 bucket: %s", file_name, a->s3_dir);
-	gettimeofday(&end_time,NULL);
-        float run_time = ((end_time.tv_sec*1000000 + end_time.tv_usec) - (start_time.tv_sec*1000000 + start_time.tv_usec)) / 1000000.0;
-        total_s3_check_time += run_time;
-        debug(D_MAKEFLOW_HOOK," It took %f seconds to check if %s is in %s",run_time, file_name, a->s3_dir);
-        debug(D_MAKEFLOW_HOOK," The total s3 check time is %f second(s)",total_s3_check_time);
 	return 1;
 }
 
@@ -413,10 +421,9 @@ static int makeflow_archive_file(struct archive_instance *a, struct batch_file *
 	/* Generate the file archive id (content based) if does not exist. */
 	char * id;
 	if(is_dir(f->inner_name) == 0){
-		if(!f->hash)
-                        f->hash = batch_file_generate_id_dir(f->inner_name);
+		f->hash = batch_file_generate_id_dir(f->inner_name);
 		debug(D_MAKEFLOW_HOOK, " This is the hash of %s: %s",f->inner_name, f->hash);
-                id = f->hash;
+                id = xxstrdup(f->hash);
 	}
 	else{
 		id = batch_file_generate_id(f);

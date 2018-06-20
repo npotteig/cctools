@@ -185,9 +185,8 @@ char * batch_task_generate_id(struct batch_task *t) {
 		char * file_id;
 		if(is_dir(f->inner_name) == 0){
 			debug(D_MAKEFLOW, "The FILE HASH is %s",f->hash);
-        	if(!f->hash)
-            	f->hash = batch_file_generate_id_dir(f->outer_name);
-        	file_id = f->hash;
+			f->hash = batch_file_generate_id_dir(f->outer_name);
+        	file_id = xxstrdup(f->hash);
 			debug(D_MAKEFLOW, "The FILE HASH IS %s", file_id);
         }
         else{
