@@ -363,10 +363,11 @@ static int makeflow_archive_write_task_info(struct archive_instance *a, struct d
 /* Check to see if a file is already in the s3 bucket */
 static int in_s3_archive(struct archive_instance *a, char *file_name){
 	char *check_sum_value = hash_table_lookup(s3_files_in_archive, file_name);
+	// Check to see if file is already in the hash table before checking s3
         if(check_sum_value == NULL){	
 		struct timeval start_time;
 		struct timeval end_time;
-		char *inArchive = string_format("aws s3api head-object --bucket %s --key %s >& /dev/null", a->s3_dir+5, file_name);
+		char *inArchive = string_format("aws s3api head-object --bucket %s --key %s >&/dev/null", a->s3_dir+5, file_name);
 		gettimeofday(&start_time, NULL);
 		if(system(inArchive) != 0){
 			debug(D_MAKEFLOW_HOOK, "file/task %s does not exist in the S3 bucket: %s", file_name, a->s3_dir);
@@ -394,13 +395,12 @@ static int makeflow_archive_s3_file(struct archive_instance *a, char *batchID, c
 	// Copy to s3 archive
 	struct timeval start_time;
 	struct timeval end_time;
-	gettimeofday(&start_time, NULL);
 	char *fileCopy;
 	if(is_dir(file_path) != 0){
 		fileCopy = string_format("aws s3 cp %s %s/%s",file_path,a->s3_dir,batchID);
 	}
 	else{
-		char *tarDir = string_format("tar -czvf %s/%s.tar.gz -C %s .",file_path,batchID,file_path);
+		char *tarDir = string_format("tar -czvf %s.tar.gz -C %s .",file_path,file_path);
 		if(system(tarDir) != 0){
 			free(tarDir);
 			return 0;
@@ -408,6 +408,7 @@ static int makeflow_archive_s3_file(struct archive_instance *a, char *batchID, c
 		free(tarDir);
 		fileCopy = string_format("aws s3 cp %s.tar.gz %s/%s",file_path,a->s3_dir,batchID);
 	}
+	gettimeofday(&start_time, NULL);
 	if(system(fileCopy) != 0){
 		gettimeofday(&end_time,NULL);
 		float run_time = ((end_time.tv_sec*1000000 + end_time.tv_usec) - (start_time.tv_sec*1000000 + start_time.tv_usec)) / 1000000.0;
@@ -678,9 +679,10 @@ int makeflow_archive_copy_preserved_files(struct archive_instance *a, struct bat
 		char *file_name = xxstrdup(f->outer_name);
 		debug(D_MAKEFLOW_HOOK,"Trying to copy file to %s",file_name);
 		char *file_to_check = xxstrdup(file_name);
+		//Check to see if the directory was copied as an empty file/incorrectly
 		stat(dirname(file_to_check),&buf);
 		if(S_ISREG(buf.st_mode)){
-			debug(D_MAKEFLOW,"Removing directory name %s",file_to_check);
+			debug(D_MAKEFLOW,"Removing empty file in the place of directory name %s",file_to_check);
 			char *dirEmpty = string_format("rm -rf %s",file_to_check);
 			system(dirEmpty);
 			free(dirEmpty);
@@ -693,6 +695,7 @@ int makeflow_archive_copy_preserved_files(struct archive_instance *a, struct bat
 		debug(D_MAKEFLOW_HOOK,"Creating directory %s",dirname(directory_name));
 		debug(D_MAKEFLOW_HOOK,"This is the directory name %s",directory_name);
 		if(strcmp(directory_name,file_name) != 0){		
+			//Create the upper level directory to copy the output files into if necessary
 			if (!create_dir(directory_name, 0777) && errno != EEXIST){
 				debug(D_ERROR|D_MAKEFLOW_HOOK,"Failed to create directory %s",directory_name);
 				free(directory_name);
@@ -702,7 +705,7 @@ int makeflow_archive_copy_preserved_files(struct archive_instance *a, struct bat
 			}
 		}
 		free(directory_name);
-		// Copy output file over
+		// Copy output file or directory over to specified location
 		debug(D_MAKEFLOW, "This is the file name now %s",file_name);
 		if(is_dir(output_file_path) != 0){
 			debug(D_MAKEFLOW,"Actually copying this file %s",file_name);
@@ -838,8 +841,8 @@ static int makeflow_s3_archive_copy_task_files(struct archive_instance *a, char 
                 		debug(D_MAKEFLOW_HOOK," It took %f seconds for %s to download from %s",run_time, id, a->s3_dir);
                 		debug(D_MAKEFLOW_HOOK," The total download time is %f second(s)",total_down_time);
 				free(copyLocal);	
-				//Extract the tar file of a directory 
-				char *extractDirTar = string_format("tar -xzvf %s/%s -C %s >/dev/null",filePath,file_name,filePath);
+				//Extract the tar file of a directory (always run even if it isnt a tar file) 
+				char *extractDirTar = string_format("tar -xzvf %s -C %s >&/dev/null",filePath,filePath);
 				if(system(extractDirTar) != 0){
 					debug(D_MAKEFLOW_HOOK,"%s is either a file or the tar file could not be extracted",file_name);
 					free(extractDirTar);

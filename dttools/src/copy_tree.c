@@ -68,7 +68,6 @@ int copy_direntry(const char *s, const char *t) {
 		if(!create_dir(t, (int)default_dirmode)) return -1;
 		return copy_dir_real(s, t);
 	} else if(S_ISREG(s_stat.st_mode)) {
-		debug(D_MAKEFLOW,"This is file being copied %s and this is the target %s",s,t);
 		return copy_file_to_file(s, t);
 	} else if(S_ISLNK(s_stat.st_mode)) {
 		return copy_symlink(s, t);
@@ -100,7 +99,6 @@ int copy_dir_real(const char *source, const char *target) {
 	{
 		char *s = NULL;
 		char *t = NULL;
-		debug(D_MAKEFLOW,"This is the file to be copied %s",entry->d_name);
 		if(!strcmp(entry->d_name, ".") || !strcmp(entry->d_name, ".."))
 			continue;
 
