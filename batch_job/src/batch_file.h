@@ -62,7 +62,7 @@ int batch_file_outer_compare(const void *file1, const void *file2);
 
 /** Generate a sha1 hash based on the file contents.
 @param f The batch_file whose checksum will be generated.
-@return Allocated string of the hash, user should free.
+@return Allocated string of the hash, user should free or NULL on error of checksumming file.
 */
 char * batch_file_generate_id(struct batch_file *f);
 
@@ -74,7 +74,7 @@ int is_dir(char *file_name);
 
 /** Generates a sha1 hash based on the directory's contents.
 @param file_name The directory that will be checked
-@return Allocated string of the hash, user should free.
+@return Allocated string of the hash, user should free or NULL on error scanning the directory.
 */
 char *  batch_file_generate_id_dir(char *file_name);
 

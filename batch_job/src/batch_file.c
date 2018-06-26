@@ -10,9 +10,13 @@ See the file COPYING for details.
 #include "xxmalloc.h"
 #include "path.h"
 #include "hash_table.h"
-
+#include <time.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 struct hash_table *check_sums = NULL;
+float total_checksum_time = 0.0;
 
 /**
  * Create batch_file from outer_name and inner_name.
@@ -111,17 +115,26 @@ char * batch_file_generate_id(struct batch_file *f) {
         }
 	char *check_sum_value = hash_table_lookup(check_sums, f->outer_name);
 	if(check_sum_value == NULL){
-		unsigned char *hash = xxcalloc(1, sizeof(char *)*SHA1_DIGEST_LENGTH);
+		unsigned char hash[SHA1_DIGEST_LENGTH];
+		struct timeval start_time;
+        	struct timeval end_time;
+        
+       	 	gettimeofday(&start_time,NULL);
 		int success = sha1_file(f->outer_name, hash);
+		gettimeofday(&end_time,NULL);
+        	float run_time = ((end_time.tv_sec*1000000 + end_time.tv_usec) - (start_time.tv_sec*1000000 + start_time.tv_usec)) / 1000000.0;
+        	total_checksum_time += run_time;
+        	debug(D_MAKEFLOW_HOOK," The total checksum time is %f",total_checksum_time);
 		if(success == 0){
 			debug(D_MAKEFLOW, "Unable to checksum this file: %s", f->outer_name);
+			return NULL;
 		}
 		f->hash = xxstrdup(sha1_string(hash));
 		hash_table_insert(check_sums, f->outer_name, xxstrdup(sha1_string(hash)));
-		free(hash);
+		debug(D_MAKEFLOW,"CHECKSUM hash of %s is: %s",f->outer_name,f->hash);
 		return xxstrdup(f->hash);
 	}
-	debug(D_MAKEFLOW,"CHECKSUM HAS ALREADY BEEN COMPUTED FOR %s",f->outer_name);
+	debug(D_MAKEFLOW,"Checksum already exists in hash table. Cached CHECKSUM hash of %s is: %s", f->outer_name, check_sum_value);
 	return xxstrdup(check_sum_value);
 }
 
@@ -164,36 +177,47 @@ char *  batch_file_generate_id_dir(char *file_name){
 		num = scandir(file_name, &dp, NULL, alphasort);
 		if(num < 0){
 			debug(D_MAKEFLOW,"Unable to scan %s", file_name);
-			return "";
+			return NULL;
 		}
 		else{
 			while(num--){
-				if(!(strcmp(dp[num]->d_name,".") == 0) && !(strcmp(dp[num]->d_name,"..") == 0)){
+				if(strcmp(dp[num]->d_name,".") != 0 && strcmp(dp[num]->d_name,"..") != 0){
 					char *file_path = string_format("%s/%s",file_name,dp[num]->d_name);
 					if(is_dir(file_path) == 0){
 						hash_sum = string_format("%s%s",hash_sum,batch_file_generate_id_dir(file_path));
 					}
 					else{
-						unsigned char *hash = xxcalloc(1, sizeof(char *)*SHA1_DIGEST_LENGTH);
-						debug(D_MAKEFLOW, "THIS IS THE DP_DNAME: %s", file_path);
+						unsigned char hash[SHA1_DIGEST_LENGTH];
+						struct timeval start_time;
+					        struct timeval end_time;
+						
+						gettimeofday(&start_time,NULL);
 						int success = sha1_file(file_path, hash);
+						gettimeofday(&end_time,NULL);
+        					float run_time = ((end_time.tv_sec*1000000 + end_time.tv_usec) - (start_time.tv_sec*1000000 + start_time.tv_usec)) / 1000000.0;
+        					total_checksum_time += run_time;
+        					debug(D_MAKEFLOW_HOOK," The total checksum time is %f",total_checksum_time);
 						if(success == 0){
 							debug(D_MAKEFLOW, "Unable to checksum this file: %s", file_path);
+							free(file_path);
+							free(dp[num]);
+							continue;
 						}
-						hash_sum = string_format("%s%s",hash_sum,sha1_string(hash));
-						debug(D_MAKEFLOW, "THIS IS THE HASH SUM: %s",hash_sum);
-						free(hash);
+						hash_sum = string_format("%s%s:%s",hash_sum,file_name,sha1_string(hash));
 					}
+					free(file_path);
 				}
+				free(dp[num]);
 			}
 			free(dp);
 			unsigned char hash[SHA1_DIGEST_LENGTH];
 			sha1_buffer(hash_sum, strlen(hash_sum), hash);
+			free(hash_sum);
 			hash_table_insert(check_sums, file_name, xxstrdup(sha1_string(hash)));
-			debug(D_MAKEFLOW,"THIS IS THE FINAL HASH SUM: %s",sha1_string(hash));
+			debug(D_MAKEFLOW,"CHECKSUM hash of %s is: %s",file_name,sha1_string(hash));
 			return xxstrdup(sha1_string(hash));
 		}
 	}
-	debug(D_MAKEFLOW,"CHECKSUM HAS ALREADY BEEN COMPUTED FOR %s",file_name);	
-	return xxstrdup(check_sum_value);
+	debug(D_MAKEFLOW,"Checksum already exists in hash table. Cached CHECKSUM hash of %s is: %s", file_name, check_sum_value);
+	return check_sum_value;
 }

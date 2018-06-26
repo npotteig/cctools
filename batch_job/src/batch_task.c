@@ -181,13 +181,10 @@ char * batch_task_generate_id(struct batch_task *t) {
 	/* add checksum of the node's input files together */
 	struct list_cursor *cur = list_cursor_create(t->input_files);
 	for(list_seek(cur, 0); list_get(cur, (void**)&f); list_next(cur)) {
-		debug(D_MAKEFLOW, "THIS IS THE ADDRESS OF THE FILE: %p",f);
 		char * file_id;
 		if(is_dir(f->inner_name) == 0){
-			debug(D_MAKEFLOW, "The FILE HASH is %s",f->hash);
 			f->hash = batch_file_generate_id_dir(f->outer_name);
         	file_id = xxstrdup(f->hash);
-			debug(D_MAKEFLOW, "The FILE HASH IS %s", file_id);
         }
         else{
         	file_id = batch_file_generate_id(f);
