@@ -36,6 +36,7 @@ Updated for S3 bucket handling: Nicholas Potteiger
 #include "xxmalloc.h"
 #include "hash_table.h"
 #include "copy_tree.h"
+#include "aws4c.h"
 
 #include "batch_job.h"
 #include "batch_wrapper.h"
@@ -808,14 +809,13 @@ static int makeflow_s3_archive_copy_task_files(struct archive_instance *a, char 
 		struct list_cursor *cur = list_cursor_create(t->output_files);
 		// Iterate through output files
 		for(list_seek(cur, 0); list_get(cur, (void**)&f); list_next(cur)) {
-			char *output_file_path = string_format("%s/output_files/%s", task_path,  f->inner_name);	
+			char *output_file_path = string_format("%s/output_files/%s", task_path,  basename(f->inner_name));	
 			char buf[1024];
 			ssize_t len;
 			// Read what the symlink is actually pointing to
 			if((len = readlink(output_file_path, buf, sizeof(buf)-1)) != -1)
 				buf[len] = '\0';	
 			free(output_file_path);
-			
 			// Grabs the actual name of the file from the buffer
 			char *file_name	= basename(buf); 
 			debug(D_MAKEFLOW_HOOK,"The FILE_NAME  is %s",file_name);	
@@ -841,13 +841,26 @@ static int makeflow_s3_archive_copy_task_files(struct archive_instance *a, char 
                 		debug(D_MAKEFLOW_HOOK," It took %f seconds for %s to download from %s",run_time, id, a->s3_dir);
                 		debug(D_MAKEFLOW_HOOK," The total download time is %f second(s)",total_down_time);
 				free(copyLocal);	
-				//Extract the tar file of a directory (always run even if it isnt a tar file) 
-				char *extractDirTar = string_format("tar -xzvf %s -C %s >&/dev/null",filePath,filePath);
+				//Extract the tar file of a directory (always run even if it isnt a tar file)
+				char *fileDir = string_format("%s/files/%.2s",a->dir,file_name); 
+				char *extractDirTar = string_format("tar -xzvf %s -C %s/foo >&/dev/null",filePath,fileDir);
+				char *makeDir = string_format("mkdir %s/foo",fileDir);
+				system(makeDir);
+				free(makeDir);
 				if(system(extractDirTar) != 0){
 					debug(D_MAKEFLOW_HOOK,"%s is either a file or the tar file could not be extracted",file_name);
 					free(extractDirTar);
-					return 0;
+					char *removeFooDir = string_format("rm -rf %s/foo",fileDir);
+					system(removeFooDir);
+					continue;
 				}
+				char *removeTar = string_format("rm %s",filePath);
+				system(removeTar);
+				free(removeTar);
+				char *renameFile = string_format("mv %s/foo %s", fileDir, filePath);
+				system(renameFile);
+				free(renameFile);
+				free(fileDir);
 				free(extractDirTar);
 
 			}
