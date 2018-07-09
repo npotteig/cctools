@@ -39,6 +39,8 @@
 /// \todo Include regression testing
 /// \todo Run thing through valgrind
 
+#ifdef HAS_CURL
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
@@ -1352,3 +1354,6 @@ void   aws_iobuf_free ( IOBuf * bf )
 /*!
   \}
 */
+
+#endif
+

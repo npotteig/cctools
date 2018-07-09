@@ -10,7 +10,9 @@ OBJECTS = dag.o dag_node_footprint.o dag_node.o dag_file.o dag_variable.o dag_vi
 PROGRAMS = makeflow makeflow_viz makeflow_analyze makeflow_linker makeflow_status
 SCRIPTS = condor_submit_makeflow makeflow_graph_log makeflow_monitor starch makeflow_linker_perl_driver makeflow_linker_python_driver makeflow_archive_query mf_mesos_scheduler mf_mesos_executor mf_mesos_setting makeflow_ec2_setup makeflow_ec2_cleanup makeflow_lambda_setup makeflow_lambda_cleanup
 
-CCTOOLS_EXTERNAL_LINKAGE += -lcurl -lcrypto
+ifeq ($(CCTOOLS_CURL_AVAILABLE),yes)
+CCTOOLS_EXTERNAL_LINKAGE += $(CCTOOLS_CURL_LDFLAGS) -lssl -lcrypto
+endif
 
 MAKEFLOW_WRAPPERS = makeflow_wrapper_enforcement.o makeflow_wrapper_umbrella.o makeflow_mounts.o
 SCRIPTS = condor_submit_makeflow makeflow_graph_log makeflow_monitor starch makeflow_linker_perl_driver makeflow_linker_python_driver makeflow_archive_query mf_mesos_scheduler mf_mesos_executor mf_mesos_setting makeflow_ec2_setup makeflow_ec2_cleanup makeflow_amazon_batch_setup makeflow_amazon_batch_cleanup makeflow_lambda_setup makeflow_lambda_cleanup
