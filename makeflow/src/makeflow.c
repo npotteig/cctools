@@ -1054,8 +1054,8 @@ static void show_help_run(const char *cmd)
 	        /********************************************************************************/
 	printf("\nData Handling:\n");
 	printf("    --archive                   Read jobs from and write completed jobs into archive.\n");
-	printf("    --archive-s3=<s3_bucket>    Base s3 bucket name (default: s3://makeflows3archive).\n");
-	printf("    --archive-s3-no-check=<s3_bucket> Don't check for files in s3 bucket before downloading or copying.\n");
+	printf("    --archive-s3=<s3_bucket>    Base s3 bucket name (DEFAULT: makeflows3archive).\n");
+	printf("    --archive-s3-no-check=<s3_bucket> Don't check for files in s3 bucket before uploading.\n");
 	printf("    --archive-read              Read jobs from archive.\n");
 	printf("    --archive-write             Write jobs into archive.\n");
 	printf("    --archive-dir=<dir>         Base archive directory (default: /tmp/makeflow.archive.USERID).\n");

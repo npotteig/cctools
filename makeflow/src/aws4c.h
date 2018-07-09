@@ -15,6 +15,8 @@
  */
 
 
+//Edited by Nicholas Potteiger for integration into makeflow_module_archive.c
+
 /// IOBuf Node
 typedef struct _IOBufNode
 {

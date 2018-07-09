@@ -34,6 +34,8 @@
 
 */
 
+//Edited by Nicholas Potteiger for integration into makeflow_module_archive.c
+
 /// \todo Include regression testing
 /// \todo Run thing through valgrind
 
@@ -132,7 +134,7 @@ static char *__b64_encode(const unsigned char *input, int length)
   bmem = BIO_new(BIO_s_mem());
   b64 = BIO_push(b64, bmem);
   BIO_write(b64, input, length);
-  if(BIO_flush(b64)) ; /* make gcc 4.1.2 happy */
+  BIO_flush(b64); /* make gcc 4.1.2 happy */
   BIO_get_mem_ptr(b64, &bptr);
 
   char *buff = (char *)malloc(bptr->length);
@@ -679,10 +681,10 @@ static int s3_do_put ( FILE *b, char * const signature,
   curl_easy_setopt ( ch, CURLOPT_HTTPHEADER, slist);
   curl_easy_setopt ( ch, CURLOPT_URL, Buf );
   curl_easy_setopt ( ch, CURLOPT_READDATA, b );
-  curl_easy_setopt ( ch, CURLOPT_VERBOSE, 1L );
+  //curl_easy_setopt ( ch, CURLOPT_VERBOSE, 1L );
   curl_easy_setopt ( ch, CURLOPT_UPLOAD, 1L );
   curl_easy_setopt ( ch, CURLOPT_INFILESIZE,(curl_off_t)file_info.st_size);
-  curl_easy_setopt ( ch, CURLOPT_FOLLOWLOCATION, 1 );
+  //curl_easy_setopt ( ch, CURLOPT_FOLLOWLOCATION, 1 );
 
   int  sc  = curl_easy_perform(ch);
   /** \todo check the return code  */
@@ -713,17 +715,26 @@ static int s3_do_get ( FILE *b, char * const signature,
   curl_easy_setopt ( ch, CURLOPT_URL, Buf );
   curl_easy_setopt ( ch, CURLOPT_WRITEFUNCTION, writefunc );
   curl_easy_setopt ( ch, CURLOPT_WRITEDATA, b );
-  curl_easy_setopt ( ch, CURLOPT_VERBOSE, 1L );
-  curl_easy_setopt ( ch, CURLOPT_FOLLOWLOCATION, 1 );
+  //curl_easy_setopt ( ch, CURLOPT_VERBOSE, 1L );
+  //curl_easy_setopt ( ch, CURLOPT_FOLLOWLOCATION, 1 );
 
   int  sc  = curl_easy_perform(ch);
+  long response_code;
+  curl_easy_getinfo(ch, CURLINFO_RESPONSE_CODE, &response_code);
   /** \todo check the return code  */
   __debug ( "Return Code: %d ", sc );
   
   curl_slist_free_all(slist);
   curl_easy_cleanup(ch);
 
-  return sc;
+  if(response_code == 200){
+        printf("FILE EXISTS\n");
+        return 0;
+  }
+  else{
+        printf("FILE DOES NOT EXIST\n");
+        return 1;
+  }
 
 }
 
